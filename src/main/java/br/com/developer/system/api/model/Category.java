@@ -5,6 +5,8 @@ import javax.persistence.GeneratedValue;
 import javax.persistence.GenerationType;
 import javax.persistence.Id;
 import javax.persistence.Table;
+import javax.validation.constraints.NotEmpty;
+import javax.validation.constraints.Size;
 
 @Entity
 @Table(name = "CATEGORY")
@@ -13,6 +15,9 @@ public class Category {
 	@Id
 	@GeneratedValue(strategy = GenerationType.AUTO)
 	private Long code;
+	
+	@Size(min = 3, max = 50, message = "{validation.name.size}")
+	@NotEmpty(message = "{validation.name.notEmpty}")
 	private String name;
 	
 	public Long getCode() {
