@@ -69,30 +69,4 @@ public class CustomGlobalExceptionHandler extends ResponseEntityExceptionHandler
 	private String i18n(String chave, Object[] args) {
 		return messageSource.getMessage(chave, args, LocaleContextHolder.getLocale());
 	}
-	
-	public static class ErrorApi {
-		private String message;
-		private String internalMessage;
-
-		public ErrorApi(String message, String internalMessage) {
-			this.message = message;
-			this.internalMessage = internalMessage;
-		}
-
-		public String getMessage() {
-			return message;
-		}
-
-		public void setMessage(String message) {
-			this.message = message;
-		}
-
-		public String getInternalMessage() {
-			return internalMessage;
-		}
-
-		public void setInternalMessage(String internalMessage) {
-			this.internalMessage = internalMessage;
-		}
-	}
 }
