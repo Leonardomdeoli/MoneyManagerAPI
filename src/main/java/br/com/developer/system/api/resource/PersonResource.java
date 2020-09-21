@@ -18,36 +18,36 @@ import org.springframework.web.bind.annotation.RequestMapping;
 import org.springframework.web.bind.annotation.RestController;
 
 import br.com.developer.system.api.event.ResourceCreateEvent;
-import br.com.developer.system.api.model.Category;
-import br.com.developer.system.api.repository.CategoryRepository;
+import br.com.developer.system.api.model.Person;
+import br.com.developer.system.api.repository.PersonRepository;
 
 @RestController
-@RequestMapping("/category")
-public class CategoryResource {
+@RequestMapping("/person")
+public class PersonResource {
 
 	@Autowired
-	private CategoryRepository categoryRepository;
+	private PersonRepository personRepository;
 	
 	@Autowired
 	private ApplicationEventPublisher publisher;
 
 	@GetMapping
-	public List<Category> getCategories() {
-		return categoryRepository.findAll();
+	public List<Person> getCategories() {
+		return personRepository.findAll();
 	}
 
 	@PostMapping
-	public ResponseEntity<Category> newCategory(@Valid @RequestBody Category category, HttpServletResponse response) {
-		Category categorySalved = categoryRepository.save(category);
+	public ResponseEntity<Person> newperson(@Valid @RequestBody Person person, HttpServletResponse response) {
+		Person personSalved = personRepository.save(person);
+		
+		publisher.publishEvent(new ResourceCreateEvent(this, response, personSalved.getCode()));
 
-		publisher.publishEvent(new ResourceCreateEvent(this, response, categorySalved.getCode()));
-
-		return ResponseEntity.status(HttpStatus.CREATED).body(categorySalved);
+		return ResponseEntity.status(HttpStatus.CREATED).body(personSalved);
 	}
 	
 	@GetMapping("/{code}")
-	public ResponseEntity<Category> findToCode(@PathVariable Long code) {
-		Optional<Category> optional = categoryRepository.findById(code);
+	public ResponseEntity<Person> findToCode(@PathVariable Long code) {
+		Optional<Person> optional = personRepository.findById(code);
 		
 		return optional.isPresent() ? ResponseEntity.ok().body(optional.get()) : ResponseEntity.notFound().build();
 	}
