@@ -7,6 +7,7 @@ import javax.persistence.GenerationType;
 import javax.persistence.Id;
 import javax.persistence.Table;
 import javax.validation.constraints.NotEmpty;
+import javax.validation.constraints.NotNull;
 import javax.validation.constraints.Size;
 
 @Entity
@@ -15,31 +16,24 @@ public class Person {
 
 	@Id
 	@GeneratedValue(strategy = GenerationType.AUTO)
-	private Long code;
+	private Long id;
 
 	@Size(min = 3, max = 50, message = "{validation.name.size}")
 	@NotEmpty(message = "{validation.name.notEmpty}")
 	private String name;
 
-	@NotEmpty
+	@NotNull(message = "{validation.active.notEmpty}")
 	private Boolean active;
 	
 	@Embedded
 	private Address address;
 
-	public Person(Long code, String name, Boolean active, Address address) {
-		this.code = code;
-		this.name = name;
-		this.active = active;
-		this.address = address;
+	public Long getId() {
+		return id;
 	}
-
-	public Long getCode() {
-		return code;
-	}
-
-	public void setCode(Long code) {
-		this.code = code;
+	
+	public void setId(Long id) {
+		this.id = id;
 	}
 
 	public String getName() {

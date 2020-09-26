@@ -14,18 +14,18 @@ public class Category {
 
 	@Id
 	@GeneratedValue(strategy = GenerationType.AUTO)
-	private Long code;
+	private Long id;
 	
 	@Size(min = 3, max = 50, message = "{validation.name.size}")
 	@NotEmpty(message = "{validation.name.notEmpty}")
 	private String name;
 	
-	public Long getCode() {
-		return code;
+	public Long getId() {
+		return id;
 	}
 	
-	public void setCode(Long code) {
-		this.code = code;
+	public void setCode(Long id) {
+		this.id = id;
 	}
 	
 	public String getName() {

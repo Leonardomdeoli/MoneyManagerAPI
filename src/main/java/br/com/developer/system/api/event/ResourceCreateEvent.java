@@ -9,19 +9,19 @@ public class ResourceCreateEvent extends ApplicationEvent {
 	private static final long serialVersionUID = 1L;
 	
 	private HttpServletResponse responde;
-	private Long code;
+	private Long id;
 	
-	public ResourceCreateEvent(Object source, HttpServletResponse responde, Long code) {
+	public ResourceCreateEvent(Object source, HttpServletResponse responde, Long id) {
 		super(source);
 		this.responde = responde;
-		this.code = code;
+		this.id = id;
 	}
 
 	public HttpServletResponse getResponde() {
 		return responde;
 	}
 
-	public Long getCode() {
-		return code;
+	public Long getId() {
+		return id;
 	}
 }

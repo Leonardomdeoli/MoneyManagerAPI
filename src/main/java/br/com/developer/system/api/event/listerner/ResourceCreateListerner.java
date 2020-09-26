@@ -16,9 +16,9 @@ public class ResourceCreateListerner implements ApplicationListener<ResourceCrea
 	@Override
 	public void onApplicationEvent(ResourceCreateEvent event) {
 		HttpServletResponse response = event.getResponde();
-		Long code = event.getCode();
+		Long id = event.getId();
 
-		URI uri = ServletUriComponentsBuilder.fromCurrentRequestUri().path("/{code}").buildAndExpand(code).toUri();
+		URI uri = ServletUriComponentsBuilder.fromCurrentRequestUri().path("/{id}").buildAndExpand(id).toUri();
 
 		response.setHeader("Location", uri.toASCIIString());
 	}
